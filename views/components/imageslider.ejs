@@ -1,0 +1,7 @@
+<swiper-container class="mySwiper rounded-2xl overflow-hidden" pagination="true">
+    <% imageslider.forEach(image => { %>
+    <swiper-slide>
+        <img src="<%= image.image %>" alt="">
+    </swiper-slide>
+    <% }); %>
+</swiper-container>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <%- include('./config/import') %>
+</head>
+<body class="bg-zinc-50">
+
+    <%- include('./components/nav') %>
+    <div class="flex justify-center px-5">
+        <div class="w-full max-w-7xl">
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8 my-[50px]">
+                <div class="py-5 bg-white rounded-2xl shadow-sm border">
+                    <a href="/profile/fillcode" class="text-[<%= config.color %>] gap-3">
+                        <span class="flex justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+                        </span>
+                        <p class="font-bold text-[20px] text-center">
+                            Top up via code
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="flow-root my-[100px]">
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+                    <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 flex gap-1 items-center">
+                            <span class="text-[<%= config.color %>]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </span>
+                            username
+                        </dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                            <%= user.username %>
+                        </dd>
+                    </div>
+                
+                    <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 flex gap-1 items-center">
+                            <span class="text-[<%= config.color %>]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            </span>
+                            email
+                        </dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                            <%= user.email %>
+                        </dd>
+                    </div>
+                
+                    <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 flex gap-1 items-center">
+                            <span class="text-[<%= config.color %>]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-coins"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></svg>
+                            </span>
+                            points</dt>
+                            <dd class="text-gray-700 sm:col-span-2">
+                                <%= Number(user.points).toFixed(2) %> ฿
+                            </dd>
+                    </div>
+                
+                    <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 flex gap-1 items-center">
+                            <span class="text-[<%= config.color %>]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-marked"><path d="M10 2v8l3-3 3 3V2"/><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+                            </span>
+                            role</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                            <% if (user.role === 0) { %>
+                                member
+                            <% } else { %>
+                                administrator
+                            <% } %>
+                        </dd>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900 flex gap-1 items-center">
+                            <span class="text-[<%= config.color %>]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                            </span>
+                            Date</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                            <%
+                                const date = new Date(user.created_at);
+                                const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                                const day = date.getDate();
+                                const month = months[date.getMonth()];
+                                const year = date.getFullYear();
+                                const formattedDate = `${month} ${day}, ${year}`;
+                            %>
+                            <%= formattedDate %>
+                        </dd>
+                    </div>
+
+                    </dl>
+                </div>
+                <div class="overflow-x-auto bg-white rounded-2xl my-[50px]">
+                    <div class="text-[<%= config.color %>] p-5">
+                        <h1 class="font-semibold">
+                            Order history
+                        </h1>
+                        <p class="text-gray-400 text-xs">
+                            history
+                        </p>
+                    </div>
+                    <% if (stock.length > 0) { %>
+                        <table class="min-w-full divide-y-2 divide-gray-200 text-sm">
+                        <thead class="ltr:text-left rtl:text-right">
+                            <tr>
+                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                    Id
+                                </th>
+                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                    Product
+                                </th>
+                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                    Data
+                                </th>
+                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                    Date
+                                </th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody class="divide-y divide-gray-200">
+                            <% stock.forEach(item => { %>
+                                <tr>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        <div class="flex justify-center">
+                                            <%= item.token %>
+                                        </div>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        <div class="flex justify-center">
+                                            <%= item.prefer_token %>
+                                        </div>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        <div class="flex justify-center">
+                                            <%= item.data %>
+                                        </div>
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        <div class="flex justify-center">
+                                            <%
+                                                const date = new Date(item.created_at);
+                                                const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                                                const day = date.getDate();
+                                                const month = months[date.getMonth()];
+                                                const year = date.getFullYear();
+                                                const formattedDate = `${month} ${day}, ${year}`;
+                                            %>
+                                            <%= formattedDate %>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                        </table>
+                    <% } else { %>
+                        <p class="text-red-500 text-center text-xl">
+                            No Order
+                        </p>
+                    <% } %>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <%- include('./components/footer') %>
+    
+</body>
+</html>

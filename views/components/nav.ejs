@@ -1,0 +1,60 @@
+<div class="flex justify-center px-5 py-5 bg-white shadow-sm">
+    <div class="w-full max-w-7xl">
+        <div class="flex justify-between items-center">
+            
+            <div>
+                <a href="/" class="font-bold text-[<%= config.color %>] uppercase">
+                    <%= config.name %>
+                </a>
+            </div>
+
+            <div>
+                <ul class="flex items-center gap-2">
+                    <li>
+                        <a href="/" class="bg-white hover:bg-zinc-50 rounded-[10px] p-2 flex hover:text-[<%= config.color %>] transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/products" class="bg-white hover:bg-zinc-50 rounded-[10px] p-2 flex hover:text-[<%= config.color %>] transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-baggage-claim"><path d="M22 18H6a2 2 0 0 1-2-2V7a2 2 0 0 0-2-2"/><path d="M17 14V4a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2v10"/><rect width="13" height="8" x="8" y="6" rx="1"/><circle cx="18" cy="20" r="2"/><circle cx="9" cy="20" r="2"/></svg>
+                        </a>
+                    </li>
+                    <% if (!user) { %>
+                        <li>
+                            <a href="/signin" class="bg-white hover:bg-zinc-50 rounded-[10px] p-2 flex hover:text-[<%= config.color %>] transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/signup" class="bg-white hover:bg-zinc-50 rounded-[10px] p-2 flex hover:text-[<%= config.color %>] transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </a>
+                        </li>
+                    <% } else { %>
+                        <% if (user && user.role === 1) { %>
+                            <li>
+                                <a href="/admin " class="bg-white hover:bg-zinc-50 rounded-[10px] p-2 flex hover:text-[<%= config.color %>] transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+                                </a>
+                            </li>
+                        <% } %>
+                        <li>
+                            <a href="/profile" class="bg-white hover:bg-zinc-50 rounded-[10px] p-2 flex hover:text-[<%= config.color %>] transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <form action="/api/auth/logout" method="POST">
+                                <button type="submit" class="bg-white hover:bg-zinc-50 rounded-[10px] p-2 flex hover:text-red-500 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                                </button>
+                            </form>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

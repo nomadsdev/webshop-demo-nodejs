@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <%- include('./config/import') %>
+</head>
+<body class="bg-zinc-50">
+
+    <%- include('./components/nav') %>
+    <div class="flex justify-center px-5 mb-[50px]">
+        <div class="w-full max-w-7xl">
+            
+            <%- include('./components/navadmin') %>
+
+            <div id="add-stock" class="hidden">
+                <div>
+                    <h1 class="font-semibold text-center text-[<%= config.color %>] text-2xl">
+                        ADD STOCKS
+                    </h1>
+                </div>
+                <% if (message) { %>
+                    <%= message %>
+                <% } %>
+                <div class="mx-auto max-w-screen-xl px-4 py-5 sm:px-6 lg:px-8">
+                
+                    <form action="/api/stocks/create" method="POST" class="mx-auto mb-0 max-w-md space-y-4">
+                        <div>
+                            <select
+                                name="prefer_token"
+                                id="prefer_token"
+                                class="mt-1.5 w-full rounded-lg border-gray-200 text-gray-700 sm:text-sm bg-white px-5 py-1 border"
+                            >
+                                <% if (products.length > 0) { %>
+                                    <% products.forEach(product => { %>
+                                        <option value="<%= product.token %>">
+                                            <%= product.name %>
+                                        </option>
+                                    <% }); %>
+                                <% } else { %>
+                                    <option value="">No Products</option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="data" class="sr-only">Data</label>
+                            <div class="relative">
+                                <textarea
+                                    type="text"
+                                    id="data"
+                                    name="data"
+                                    class="w-full rounded-lg border-gray-200 px-5 py-1 border border-gray-200pe-12 text-sm shadow-sm"
+                                    placeholder="Enter Data"
+                                ></textarea>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end">
+                            <button
+                                type="submit"
+                                class="inline-block rounded-lg bg-[<%= config.color %>] px-5 py-2 text-sm font-medium text-white"
+                            >
+                                ADD STOCKS
+                            </button>
+                        </div>
+                    </form>
+                </div>  
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border bg-white">
+                <div class="px-5 pt-5 flex justify-between items-center">
+                    <div class="text-[<%= config.color %>]">
+                        <h1 class="font-semibold">
+                            MANAGE STOCKS
+                        </h1>
+                        <p class="text-gray-400 text-xs">
+                            Stocks
+                        </p>
+                    </div>
+                    <div>
+                        <button id="open-add-stock" class="font-semibold text-sm bg-[<%= config.color %>] text-white rounded-xl px-5 py-1 flex items-center gap-2">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy-plus"><line x1="15" x2="15" y1="12" y2="18"/><line x1="12" x2="18" y1="15" y2="15"/><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                            </span>
+                            Add Stocks
+                        </button>
+                    </div>
+                </div>
+                <% if (stocks.length > 0) { %>
+                <table class="min-w-full divide-y-2 divide-gray-200 text-sm">
+                <thead class="ltr:text-left rtl:text-right">
+                    <tr>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-[<%= config.color %>]">
+                        Name Product
+                    </th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-[<%= config.color %>]">Data</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-[<%= config.color %>]">User</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-[<%= config.color %>]">Status</th>
+                    </tr>
+                </thead>
+            
+                <tbody class="divide-y divide-gray-200">
+                        <% stocks.forEach(stock => { %>
+                            <tr>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-900">
+                                    <div class="flex justify-center">
+                                        <%= stock.product_name %>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                    <div class="flex justify-center">
+                                        <%= stock.data %>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                    <div class="flex justify-center">
+                                        <% if (stock.urefer_token === null) { %>
+                                            Not yet sold
+                                        <% } else { %>
+                                            <%= stock.urefer_token %>
+                                        <% } %>
+                                    </div>
+                                </td>
+                                <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                                    <div class="flex justify-center">
+                                        <% if (stock.status === 0) { %>
+                                            <p class="bg-green-100 text-green-500 px-5 py-1 text-sm rounded-lg">
+                                                Not yet sold
+                                            </p>
+                                        <% } else { %>
+                                            <p class="bg-red-100 text-red-500 px-5 py-1 text-sm rounded-lg">
+                                                sold
+                                            </p>
+                                        <% } %>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                </tbody>
+                </table>
+                <% } else { %>
+                    <p class="flex justify-center text-red-500 pb-5">
+                        No stock
+                    </p>
+                <% } %>
+            </div>  
+
+        </div>
+    </div>
+    <%- include('./components/footer') %>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const openButton = document.getElementById('open-add-stock');
+            const addStockDiv = document.getElementById('add-stock');
+
+            openButton.addEventListener('click', function() {
+                if (addStockDiv.classList.contains('hidden')) {
+                    addStockDiv.classList.remove('hidden');
+                } else {
+                    addStockDiv.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <%- include('./config/import') %>
+</head>
+<body class="bg-white">
+
+    <%- include('./components/nav') %>
+    <div class="flex justify-center px-5 my-[50px]">
+        <div class="w-full max-w-7xl">
+
+            <div class="rounded-xl overflow-hidden shadow-sm">
+                <div class="relative">
+                    <% if (product.stock_count > 0) { %>
+                        <img src="<%= product.image %>" alt="<%= product.name %>" class="w-full h-[400px] object-cover">
+                    <% } else { %>
+                        <img src="<%= product.image %>" alt="<%= product.name %>" class="w-full h-[400px] object-cover">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                            <p class="text-white text-base uppercase font-bold">
+                                The product is sold out.
+                            </p>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="p-4">
+                    <h1 class="text-3xl font-semibold">
+                        <%= product.name %>
+                    </h1>
+                    <p class="text-sm mt-2">
+                        <%= product.description %>
+                    </p>
+                    <div class="text-lg mt-4">
+                        <span class="font-bold">Price:</span> <%= product.price %> ฿
+                    </div>
+                    <div class="text-sm mt-2">
+                        <span class="font-bold">Stock:</span> <%= product.stock_count %>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <% if (product.stock_count <= 0) { %>
+                        <p class="text-red-500 text-center mt-4">The product is sold out.</p>
+                    <% } else { %>
+                        <div class="my-[50px] flex justify-end">
+                            <form action="/api/order/purchase" method="POST" class="flex max-w-lg gap-5 items-center">
+                                <input type="hidden" name="prefer_token" id="prefer_token" value="<%= product.token %>">
+                                <div x-data="{ productQuantity: 1 }">
+                                <label for="Quantity" class="sr-only"> Quantity </label>
+
+                                <div class="flex items-center rounded border border-gray-200">
+                                    <button
+                                    type="button"
+                                    x-on:click="productQuantity--"
+                                    :disabled="productQuantity === 0"
+                                    class="size-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                    >
+                                    &minus;
+                                    </button>
+
+                                    <input
+                                    type="number"
+                                    id="quantity"
+                                    name="quantity"
+                                    x-model="productQuantity"
+                                    class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                                    />
+
+                                    <button
+                                    type="button"
+                                    x-on:click="productQuantity++"
+                                    class="size-10 leading-10 text-gray-600 transition hover:opacity-75"
+                                    >
+                                    &plus;
+                                    </button>
+                                </div>
+                                </div>
+                                <div>
+                                    <button type="submit" class="w-full bg-blue-500 text-white rounded-xl py-3 px-5 flex items-center gap-2 justify-center">
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                                        </span>
+                                        Buy
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('./components/footer') %>
+    
+</body>
+</html>

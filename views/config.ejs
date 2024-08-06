@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <%- include('./config/import') %>
+</head>
+<body class="bg-zinc-50">
+
+    <%- include('./components/nav') %>
+    <div class="flex justify-center px-5">
+        <div class="w-full max-w-7xl">
+
+            <%- include('./components/navadmin') %>
+            
+            <div class="my-[50px] flex justify-center">
+                <div class="w-full max-w-3xl">
+                    <div>
+                        <h1 class="text-center text-2xl text-[<%= config.color %>] font-semibold">
+                            Config Web
+                        </h1>
+                    </div>
+                    <% if (message) { %>
+                        <br>
+                        <div class="flex justify-center items-center">
+                            <div class="bg-[<%= config.color %>] text-white p-5 py-2 rounded-2xl flex items-center gap-2">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+                                </span>
+                                <p>
+                                    <%= message %>
+                                </p>
+                            </div>
+                        </div>
+                    <% } %>
+                    <br>
+                    <div>
+                        <form action="/api/config" method="POST">
+                            
+                            <div class="relative">
+                                <label for="image" class="sr-only"> LOGO Image URL </label>
+                            
+                                <input
+                                type="text"
+                                name="image"
+                                id="image"
+                                placeholder="<%= configs.image %>"
+                                class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm px-5 py-1 border border-gray-200"
+                                />
+                            </div>
+                            <br>
+                            <div class="relative">
+                                <label for="name" class="sr-only"> name Web Site </label>
+                            
+                                <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                placeholder="<%= configs.name %>"
+                                class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm px-5 py-1 border border-gray-200"
+                                />
+                            </div>
+                            <br>
+                            <div class="relative">
+                                <label for="description" class="sr-only"> Description </label>
+                            
+                                <input
+                                type="text"
+                                name="description"
+                                id="description"
+                                placeholder="<%= configs.description %>"
+                                class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm px-5 py-1 border border-gray-200"
+                                />
+                            </div>
+                            <br>
+                            <div class="relative">
+                                <label for="fb" class="sr-only"> Facebook </label>
+                            
+                                <input
+                                type="text"
+                                name="fb"
+                                id="fb"
+                                placeholder="<%= configs.fb %>"
+                                class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm px-5 py-1 border border-gray-200"
+                                />
+                            </div>
+                            <br>
+                            <div class="relative">
+                                <label for="dis" class="sr-only"> Discord </label>
+                            
+                                <input
+                                type="text"
+                                name="dis"
+                                id="dis"
+                                placeholder="<%= configs.dis %>"
+                                class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm px-5 py-1 border border-gray-200"
+                                />
+                            </div>
+                            <br>
+                            <div class="relative">
+                                <label for="color" class="sr-only"> Color </label>
+                            
+                                <input
+                                type="text"
+                                name="color"
+                                id="color"
+                                placeholder="<%= configs.color %>"
+                                class="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm px-5 py-1 border border-gray-200"
+                                />
+                            </div>
+                            <br>
+                            <div>
+                                <button type="submit" class="w-full bg-[<%= config.color %>] text-white font-semibold rounded-xl py-1">
+                                    Save Config
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <%- include('./components/footer') %>
+    
+</body>
+</html>

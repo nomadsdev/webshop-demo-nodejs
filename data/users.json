@@ -1,0 +1,12 @@
+{
+    "id": 1,
+    "username": "nomadsdeveloper",
+    "email": "nomads@dev.com",
+    "password": "nomads",
+    "points": "00.00",
+    "role": "0",
+    "status": "0",
+    "token": "23123123123",
+    "created_at": "12:00",
+    "updated_at": "12:000"
+}

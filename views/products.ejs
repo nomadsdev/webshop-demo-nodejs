@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <%- include('./config/import') %>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+</head>
+<body class="bg-zinc-50">
+
+    <%- include('./components/nav') %>
+    <div class="flex justify-center px-5 my-[50px]">
+        <div class="w-full max-w-7xl">
+
+            <% if (categories.length > 0) { %>
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 my-[50px]">
+                
+                <% categories.forEach(category => { %>
+                    <div class="bg-cover bg-center rounded-xl bg-[url('<%= category.image %>')] hover:shadow-sm transition ease-in-out hover:scale-[1.04] duration-500">
+                        <a href="/category/<%= category.token %>" class="block h-full text-white bg-black bg-opacity-50 p-4 py-10 rounded-xl">
+                            <div class="text-center">
+                                <h1 class="font-semibold text-3xl">
+                                    <%= category.name %>
+                                </h1>
+                                <p>
+                                    <%= category.detail %>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+            
+            </div>
+            <% } else { %>
+                <h1 class="text-red-500 text-center text-2xl">
+                    No category
+                </h1>
+            <% } %>   
+            
+            <div class="text-[<%= config.color %>] flex justify-start items-center gap-2">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-boxes"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.26 5.15"/><path d="m12 8 4.74-2.85"/><path d="M12 13.5V8"/></svg>
+                </span>
+                <h1 class="text-[<%= config.color %>] text-2xl font-bold">
+                    Recommended products
+                </h1>
+            </div>
+            <br>
+            <% if (products.length > 0) { %>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
+                    <% products.forEach(product => { %>
+                        <div class="rounded-xl overflow-hidden shadow-sm transition ease-in-out hover:scale-[1.04] duration-500">
+                            <a href="/product/<%= product.token %>">
+                                <div class="relative">
+                                    <% if (product.stock_count > 0) { %>
+                                        <img src="<%= product.image %>" alt="<%= product.name %>" class="w-full h-[200px] object-cover">
+                                    <% } else { %>
+                                        <img src="<%= product.image %>" alt="<%= product.name %>" class="w-full h-[200px] object-cover">
+                                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                                            <p class="text-white text-base uppercase font-bold">
+                                                The product is sold out.
+                                            </p>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <div class="p-2">
+                                    <div>
+                                        <%= product.name %>
+                                    </div>
+                                    <div class="text-sm mt-2">
+                                        <%= product.price %> ฿
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <p class="text-xs">
+                                            Number of products <%= product.stock_count %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } else { %>
+                <h1 class="text-red-500 text-center text-2xl">
+                    No Products
+                </h1>
+            <% } %>
+            
+        </div>
+    </div>
+    <%- include('./components/footer') %>
+    
+</body>
+</html>

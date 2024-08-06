@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "image": "adasads.png",
+    "name": "product",
+    "detail": "detail product",
+    "price": 120.00,
+    "status": 0,
+    "crefer_token": "dasadsadsads",
+    "token": "asdadsasddsaasd",
+    "created_at": "12:00"
+}
