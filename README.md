@@ -4,5 +4,5 @@ node server
 ```
 
 # Nomads Developer
-## Nodejs
-## Mysql
+* Nodejs
+* Mysql
