@@ -86,7 +86,7 @@ router.get('/products', tokenProvider, config, (req, res) => {
         });
     });
 });
-router.get('/product/:token', tokenProvider, config, (req, res) => {
+router.get('/products/:token', tokenProvider, config, (req, res) => {
     const productToken = req.params.token;
     const sqlProduct = `SELECT * FROM products WHERE token = ?`;
     const sqlStock = `SELECT COUNT(*) AS stock_count 
